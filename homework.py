@@ -94,7 +94,7 @@ def check_response(response):
 
     try:
         homework = response.get('homeworks')
-        if type(homework) != list:
+        if type(homework) is not list:
             raise TypeError(
                 'not a list'
             )
@@ -140,7 +140,7 @@ def check_tokens():
                 raise TypeError(
                     'token is None'
                 )
-            if type(token) != str:
+            if type(token) is not str:
                 raise TypeError(
                     'type token not str'
                 )
@@ -160,11 +160,12 @@ def main():
         try:
             current_timestamp = int(time.time())
             logger.info('Continue')
-            if check_tokens() is False:
+            if check_tokens():
+                response = check_response(get_api_answer(current_timestamp))
+                parse = parse_status(response)
+                time.sleep(RETRY_TIME)
+            else:
                 raise ValueError
-            response = check_response(get_api_answer(current_timestamp))
-            parse = parse_status(response)
-            time.sleep(RETRY_TIME)
 
         except Exception as error:
             message = f'Сбой в работе программы: {error}'
