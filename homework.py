@@ -156,7 +156,6 @@ def main():
     """Основная логика работы бота."""
     logger.info('Бот работает')
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
-    bot.send_message(TELEGRAM_CHAT_ID, 'nu')
     while True:
         try:
             current_timestamp = int(time.time())
