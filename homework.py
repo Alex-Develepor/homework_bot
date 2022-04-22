@@ -159,7 +159,6 @@ def main():
     while True:
         try:
             current_timestamp = int(time.time())
-            logger.info(current_timestamp)
             logger.info('Continue')
             if check_tokens():
                 response = check_response(get_api_answer(current_timestamp))
