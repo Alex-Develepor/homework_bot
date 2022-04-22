@@ -159,10 +159,12 @@ def main():
     while True:
         try:
             current_timestamp = int(time.time())
+            logger.info(current_timestamp)
             logger.info('Continue')
             if check_tokens():
                 response = check_response(get_api_answer(current_timestamp))
                 parse = parse_status(response)
+                send_message(bot, parse)
                 time.sleep(RETRY_TIME)
             else:
                 raise ValueError
@@ -174,7 +176,6 @@ def main():
             time.sleep(RETRY_TIME)
         else:
             current_timestamp = int(time.time())
-            send_message(bot, parse)
 
 
 if __name__ == '__main__':
